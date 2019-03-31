@@ -1,0 +1,36 @@
+<HTML>
+<head></head>
+<body style="border: 50px solid lightskyblue;">
+	<div style="background-color: black; width: 80px; height: 80px; border-radius: 50%;">
+	</div>
+	<script>
+		function moveBallDown() {
+			intervalHandle = setInterval(function() {
+
+				document.querySelector('div').style.top = (document.querySelector('div').offsetTop + stepSize) + 'px';
+				if (document.body.clientHeight - document.querySelector('div').offsetTop < (8 + 50 + 80)) {
+					clearInterval(intervalHandle);
+					moveBallUp();
+				}
+		
+			}, tick);
+		}
+		function moveBallUp() {
+			intervalHandle = setInterval(function() {
+
+				document.querySelector('div').style.top = (document.querySelector('div').offsetTop - stepSize) + 'px';
+				if (document.querySelector('div').offsetTop < (8 + 50)) {
+					clearInterval(intervalHandle);
+					moveBallDown();
+				}
+		
+			}, tick);
+		}
+		document.querySelector('div').style.position = 'absolute';
+		let counter = 0;
+		let intervalHandle;
+		const stepSize = 8;
+		const tick = 0;
+		moveBallDown();
+	</script>
+</body>
