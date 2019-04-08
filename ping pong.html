@@ -1,5 +1,7 @@
 <HTML>
-<head></head>
+<head>
+	<meta charset="utf-8">
+</head>
 <body style="border: 50px solid lightskyblue;">
 	<div style="background-color: black; width: 80px; height: 80px; border-radius: 50%;">
 	</div>
@@ -26,11 +28,43 @@
 		
 			}, tick);
 		}
+
+		function moveBallInXYRatio1to2() {
+
+			intervalHandle = setInterval(function() {
+
+				ball.style.top = (ball.offsetTop + 2 * stepSize) + 'px';
+				ball.style.left = (ball.offsetLeft + stepSize) + 'px';
+				if (document.body.clientHeight - ball.offsetTop < (8 + 50 + 80)) {
+					clearInterval(intervalHandle);
+					moveBallInXYRatio1toNegative2();
+				}
+		
+			}, tick);
+		}
+
+		function moveBallInXYRatio1toNegative2() {
+			intervalHandle = setInterval(function() {
+
+				ball.style.top = (ball.offsetTop - 2 * stepSize) + 'px';
+				ball.style.left = (ball.offsetLeft + stepSize) + 'px';
+				if (document.body.clientWidth - ball.offsetLeft < (8 + 50 + 80)) {
+					clearInterval(intervalHandle);
+				}
+				if (ball.offsetTop < (8 + 50)) {
+					clearInterval(intervalHandle);
+				}
+		
+			}, tick);
+		}
+
 		document.querySelector('div').style.position = 'absolute';
 		let counter = 0;
 		let intervalHandle;
-		const stepSize = 8;
+		const stepSize = 1;
 		const tick = 0;
-		moveBallDown();
+		const ball = document.querySelector('div');
+		// moveBallDown();
+		moveBallInXYRatio1to2();
 	</script>
 </body>
